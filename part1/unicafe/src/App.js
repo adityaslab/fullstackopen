@@ -10,19 +10,24 @@ const Statistics = ({good, bad, neutral}) => {
   return(
     <div>
       <h3>statistics</h3>
+      <table>
       <StatisticalLine text='good' value={good} />
       <StatisticalLine text='neutral' value={neutral} />
       <StatisticalLine text='bad' value={bad} />
       <StatisticalLine text='all' value={total} />
       <StatisticalLine text='average' value={average} />
       <StatisticalLine text='positive' value={pos} />
+      </table>
     </div>
   )
 }
 
 const StatisticalLine = ({text, value}) => {
   return(
-    <p>{text} {value}</p>
+    <tr>
+      <th>{text}</th>
+      <th>{value}</th>
+    </tr>
   )
 }
 const Button = ({text,onClick}) => {
