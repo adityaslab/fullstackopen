@@ -36,20 +36,20 @@ const Button = ({text,onClick}) => {
 
 const App = () => {
   // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const[clicks, setClicks] = useState(
+    {good:0, neutral:0, bad:0}
+  )
 
   const incgood = () => {
-    setGood(good+1)
+    setClicks({...clicks, good: clicks.good+1})
   }
 
   const incneutral = () => {
-    setNeutral(neutral+1)
+    setClicks({...clicks, neutral: clicks.neutral+1})
   }
 
   const incbad = () => {
-    setBad(bad+1)
+    setClicks({...clicks, bad: clicks.bad+1})
   }
   return (
     <div>
@@ -57,7 +57,7 @@ const App = () => {
       <Button onClick={incgood} text='good' />
       <Button onClick={incneutral} text='neutral' />
       <Button onClick={incbad} text='bad' />
-      <Statistics good={good} bad={bad} neutral={neutral} />
+      <Statistics good={clicks.good} bad={clicks.bad} neutral={clicks.neutral} />
     </div>
   )
 }
