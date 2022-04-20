@@ -1,5 +1,7 @@
-import { number } from 'prop-types'
 import { useState } from 'react'
+import Form from './components/Form'
+import Person from './components/Person'
+import Filter from './components/Filter'
 import './App.css'
 
 const App = () => {
@@ -15,10 +17,11 @@ const App = () => {
 
   const handleAdd = (event) => {
     event.preventDefault()
-    console.log(newName)
+    console.log(newName)    
     const temp = {
       name: newName,
-      number: newNumber
+      number: newNumber,
+      id: persons.length + 1
     }
     for(let x of persons){
       if(x.name === newName){
@@ -46,33 +49,12 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-        filter show with
-        <input
-        value={newFilter}
-        onChange={handleFilterChange}/>
-      </div>
+      <Filter value={newFilter} onChange={handleFilterChange}/>
       <h3>add a new</h3>
-      <form onSubmit={handleAdd}>
-        <div>
-          name: 
-          <input 
-          value={newName}
-          onChange={handleNameChange}/>
-        </div>
-        <div>
-          number:
-          <input 
-          value={newNumber}
-          onChange={handleNumberChange}/>
-        </div>
-        <div>  
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <Form onSubmit={handleAdd} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
       <h2>Numbers</h2>
     <ul>
-      {persons.map((person)=><li key={person.id}>{`${person.name} ${person.number}`}</li>)}
+      {persons.map((person)=><Person key={person.id} person={person} />)}
     </ul>
     </div>
   )
