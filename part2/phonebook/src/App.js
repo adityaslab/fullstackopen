@@ -13,6 +13,14 @@ const App = () => {
     const temp = {
       name:newName
     }
+    for(let x of persons){
+      console.log(JSON.stringify(x),newName)
+      if(x.name === newName){
+        console.log("here2")
+        window.alert(`${newName} already added in phonebook`)
+        return
+      }
+    }
     setPersons(persons.concat(temp))
   }
 
