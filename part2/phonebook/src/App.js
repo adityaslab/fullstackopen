@@ -1,20 +1,24 @@
+import { number } from 'prop-types'
 import { useState } from 'react'
 import './App.css'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas',
+      number: '9865123'
+    }
   ]) 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
   const handleAdd = (event) => {
     event.preventDefault()
     console.log(newName)
     const temp = {
-      name:newName
+      name: newName,
+      number: newNumber
     }
     for(let x of persons){
-      console.log(JSON.stringify(x),newName)
       if(x.name === newName){
         console.log("here2")
         window.alert(`${newName} already added in phonebook`)
@@ -24,8 +28,12 @@ const App = () => {
     setPersons(persons.concat(temp))
   }
 
-  const handleChange = (event) => {
+  const handleNameChange = (event) => {
     setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
   }
   return (
     <div>
@@ -35,13 +43,21 @@ const App = () => {
           name: 
           <input 
           value={newName}
-          onChange={handleChange}/>
+          onChange={handleNameChange}/>
+        </div>
+        <div>
+          number:
+          <input 
+          value={newNumber}
+          onChange={handleNumberChange}/>
+        </div>
+        <div>  
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
     <ul>
-      {persons.map((person, i)=><li key={i}>{person.name}</li>)}
+      {persons.map((person, i)=><li key={i}>{`${person.name} ${person.number}`}</li>)}
     </ul>
     </div>
   )
