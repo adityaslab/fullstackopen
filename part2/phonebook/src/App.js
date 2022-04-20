@@ -4,12 +4,14 @@ import './App.css'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas',
-      number: '9865123'
-    }
+{ name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [newFilter, setNewFilter] = useState('')
 
   const handleAdd = (event) => {
     event.preventDefault()
@@ -20,7 +22,7 @@ const App = () => {
     }
     for(let x of persons){
       if(x.name === newName){
-        console.log("here2")
+        console.log("here")
         window.alert(`${newName} already added in phonebook`)
         return
       }
@@ -35,9 +37,22 @@ const App = () => {
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value)
   }
+  const handleFilterChange = (event) => {
+    setNewFilter(event.target.value)
+    const rx = new RegExp(newFilter,'i')
+    const filtered = () => persons.filter(persons => persons.name.match(rx))
+    setPersons(filtered)
+  }
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        filter show with
+        <input
+        value={newFilter}
+        onChange={handleFilterChange}/>
+      </div>
+      <h3>add a new</h3>
       <form onSubmit={handleAdd}>
         <div>
           name: 
@@ -57,7 +72,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
     <ul>
-      {persons.map((person, i)=><li key={i}>{`${person.name} ${person.number}`}</li>)}
+      {persons.map((person)=><li key={person.id}>{`${person.name} ${person.number}`}</li>)}
     </ul>
     </div>
   )
