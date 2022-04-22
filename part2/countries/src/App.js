@@ -19,7 +19,6 @@ function App() {
     const rx = new RegExp(input,'i')
     const searchResult = () => countries.filter(country => country.name.common.match(rx))
     setSearch(searchResult)
-    console.log(searchResult)
   }
   return (
     <div>
