@@ -25,7 +25,7 @@ function App() {
     <div>
       find countries
       <input value={input} onChange={handleInputChange} />
-      <Content search={search} />
+      <Content search={search} setSearch={setSearch} />
     </div>
   )
 }
