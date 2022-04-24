@@ -1,3 +1,19 @@
+.notif {
+    color: 'green';
+    font-style: 'italic';
+    font-size: 16;
+}
+
+.error {
+  color: purple;
+  background: lightgrey;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
 ul {
     list-style-type: none;
     padding: 0;
