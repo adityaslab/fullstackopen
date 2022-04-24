@@ -11,7 +11,13 @@ const addEntry = (entry) => {
     return request.then(response => response.data)
 }
 
+const deleteEntry = (i) => {
+    const request = axios.delete(`${baseURL}/${i}`)
+    return request.then(console.log('delete successful'))
+}
+
 export default{
     getAll,
-    addEntry
+    addEntry,
+    deleteEntry
 }

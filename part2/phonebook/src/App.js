@@ -22,8 +22,7 @@ const App = () => {
     console.log(newName)    
     const temp = {
       name: newName,
-      number: newNumber,
-      id: persons.length + 1
+      number: newNumber
     }
     for(let x of persons){
       if(x.name === newName){
@@ -37,6 +36,15 @@ const App = () => {
     .then( response => {
       setPersons(persons.concat(response))
     })
+  }
+
+  const handleDelete = (person) => {
+    const i = person.id
+    const name = person.name
+    if(window.confirm(`Delete ${name}?`)){
+      setPersons(persons.filter(p => p.id !== i))
+      phonebookService.deleteEntry(i)
+    }
   }
 
   const handleNameChange = (event) => {
@@ -60,7 +68,7 @@ const App = () => {
       <Form onSubmit={handleAdd} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange}/>
       <h2>Numbers</h2>
     <ul>
-      {persons.map((person)=><Person key={person.id} person={person} />)}
+      {persons.map((person)=><Person key={person.id} person={person} setPersons={setPersons} handleDelete={handleDelete} />)}
     </ul>
     </div>
   )
