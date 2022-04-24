@@ -11,6 +11,11 @@ const addEntry = (entry) => {
     return request.then(response => response.data)
 }
 
+const updateEntry = (entry,id) => {
+    const request = axios.put(`${baseURL}/${id}`,entry)
+    return request.then(response => response.data)
+}
+
 const deleteEntry = (i) => {
     const request = axios.delete(`${baseURL}/${i}`)
     return request.then(console.log('delete successful'))
@@ -19,5 +24,6 @@ const deleteEntry = (i) => {
 export default{
     getAll,
     addEntry,
-    deleteEntry
+    deleteEntry,
+    updateEntry
 }

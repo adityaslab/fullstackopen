@@ -17,6 +17,16 @@ const App = () => {
       setPersons(response)
     })
   }, [])
+  const handleUpdate = (id,newnumber) => {
+    const entryOld = persons.find(p => p.id === id)
+    const updatedEntry = {...entryOld, number: newnumber}
+    console.log(updatedEntry)
+    phonebookService
+    .updateEntry(updatedEntry,id)
+    .then(response => {
+      setPersons(persons.map(p => p.id ===id ? response : p))
+    })
+  }
   const handleAdd = (event) => {
     event.preventDefault()
     console.log(newName)    
@@ -27,7 +37,9 @@ const App = () => {
     for(let x of persons){
       if(x.name === newName){
         console.log("here")
-        window.alert(`${newName} already added in phonebook`)
+        if(window.confirm(`${newName} already added in phonebook, replace old number with new one?`)){
+          handleUpdate(x.id,newNumber)
+        }
         return
       }
     }
